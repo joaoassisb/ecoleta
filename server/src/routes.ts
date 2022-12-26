@@ -16,5 +16,6 @@ router.get("/items", itemsController.list);
 router.post("/points", upload.single("image"), pointsController.create);
 router.get("/points", pointsController.list);
 router.get("/points/:id", pointsController.show);
+router.delete("/points/:id", pointsController.delete);
 
 export default router;

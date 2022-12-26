@@ -96,6 +96,20 @@ class PointsController {
 
     return response.json({ point: serializedPoint, items });
   }
+
+  async delete(request: Request, response: Response) {
+    const { id } = request.params;
+
+    const trx = await knex.transaction();
+
+    await trx("points").where("id", id).delete();
+
+    await knex("point_items").where("point_items.point_id", id).delete;
+
+    await trx.commit();
+
+    return response.sendStatus(200);
+  }
 }
 
 export default PointsController;
